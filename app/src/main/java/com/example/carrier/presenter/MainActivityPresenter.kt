@@ -20,7 +20,6 @@ class MainActivityPresenter(private var view: MainActivityPresenterInterface.Vie
     // best way to do this is dependency injection
     lateinit var localRepository : ShiftStatusCodeRepository
 
-
     init {
         // check if there is
         this.shiftData = ShiftDetailsResponse(0,"started",0,"Joe Trucker")
@@ -78,7 +77,7 @@ class MainActivityPresenter(private var view: MainActivityPresenterInterface.Vie
     }
 
     override fun onDestroy() {
-
+        this.view = null
     }
 
 }

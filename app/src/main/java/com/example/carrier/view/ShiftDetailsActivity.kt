@@ -61,9 +61,9 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         // getting rid of references to the current activity to help combat possible memory leaks
         // doing this on the 'onDestroy'
         presenter.onDestroy()
+        super.onDestroy()
     }
 }

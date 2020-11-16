@@ -10,6 +10,9 @@ import com.example.carrier.presenter.MainActivityPresenter
 import com.example.carrier.presenter.MainActivityPresenterInterface
 
 class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface.View {
+    // Decided to go with a MVP lite structure for the problem
+    // The advantage of this is to allow the pieces of the program to fall neatly into individual buckets and be easy to test
+    // This also allows quick and painless extension of the functions and application
     lateinit var presenter: MainActivityPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -43,7 +43,9 @@ class MainActivityPresenter(private var view: MainActivityPresenterInterface.Vie
 
                      // data put just for the flow of the program's sake
                      // this is where actually pulled data would typically go
-                     var dummyData = ShiftStatusCode(0,"scheduled")
+                     val dummyData = ShiftStatusCode(0,"scheduled")
+
+                     // caching the data locally.
                      localRepository.insertShiftStatusCode(dummyData)
                  }
 
@@ -55,10 +57,6 @@ class MainActivityPresenter(private var view: MainActivityPresenterInterface.Vie
              val receivedData = call.isExecuted
              Log.d("REPO", "getShiftData: $receivedData")
          }
-
-
-        //recievedData.isSuccessful
-        //Log.d("REPO", "getShiftData: ${recievedData.isSuccessful}")
 
         // update the UI after you get the info that you are looking for.
         updateUI()
@@ -72,7 +70,8 @@ class MainActivityPresenter(private var view: MainActivityPresenterInterface.Vie
         Log.d("REPO", "sendShiftMessage: sent $message")
     }
 
-    fun updateUI() {
+    private fun updateUI() {
+        // You could even go as far as setting an observable on the local variable to get a reaction out of the code.
         view?.updateUI()
     }
 

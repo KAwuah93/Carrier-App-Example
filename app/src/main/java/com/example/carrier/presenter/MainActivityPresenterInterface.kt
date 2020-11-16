@@ -1,6 +1,10 @@
 package com.example.carrier.presenter
 
 interface MainActivityPresenterInterface{
-    fun updateUI()
-    fun onDestroy()
+    interface Presenter {
+        fun onDestroy()
+    }
+    interface View : BaseView<MainActivityPresenter>{
+        fun updateUI()
+    }
 }

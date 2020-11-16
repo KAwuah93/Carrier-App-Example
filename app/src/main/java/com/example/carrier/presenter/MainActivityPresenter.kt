@@ -5,14 +5,13 @@ import com.example.carrier.model.data.ShiftDetailsResponse
 import com.example.carrier.model.data.ShiftRequestMessage
 import com.example.carrier.model.data.ShiftStatusCode
 import com.example.carrier.model.repos.ShiftDetailsService
-import com.example.carrier.model.repos.localrepo.ShiftStatusCodeDatabase
 import com.example.carrier.model.repos.localrepo.ShiftStatusCodeRepository
 import com.example.carrier.view.ShiftDetailsActivity
 import kotlinx.coroutines.*
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivityPresenter(private var activity: ShiftDetailsActivity?) : MainActivityPresenterInterface{
+class MainActivityPresenter(private var view: MainActivityPresenterInterface.View?) : MainActivityPresenterInterface.Presenter{
     var shiftData : ShiftDetailsResponse
 
     private val retroRepository : ShiftDetailsService = ShiftDetailsService.createService()
@@ -74,11 +73,12 @@ class MainActivityPresenter(private var activity: ShiftDetailsActivity?) : MainA
         Log.d("REPO", "sendShiftMessage: sent $message")
     }
 
-    override fun updateUI() {
-        activity?.updateUI()
+    fun updateUI() {
+        view?.updateUI()
     }
 
     override fun onDestroy() {
-        this.activity = null
+
     }
+
 }

@@ -9,7 +9,7 @@ import com.example.carrier.R
 import com.example.carrier.presenter.MainActivityPresenter
 import com.example.carrier.presenter.MainActivityPresenterInterface
 
-class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface {
+class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface.View {
     lateinit var presenter: MainActivityPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +17,7 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
         bindViews()
 
         presenter = MainActivityPresenter(this)
+        selectPresenter(presenter)
         // starting the call from the presenter
         // would use some primary key information relevant to the data table but going with '0' as a place holder
         // could probably get the data from a login source when carried over to this activity.
@@ -43,7 +44,7 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
     fun onClick(v : View){
         // this is where the message goes. Right now we'll just feed it a dummy line
         // but we could use parameters to allow us to modify the data in the future
-        // you could use editext.text here if there is an input to make things easier.
+        // you could use editText.text here if there is an input to make things easier.
         presenter.sendShiftMessage("Hello world!")
     }
 
@@ -55,10 +56,14 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
 
     }
 
+    override fun selectPresenter(presenter: MainActivityPresenter) {
+        this.presenter = presenter
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         // getting rid of references to the current activity to help combat possible memory leaks
-        // doing this on the 'ondestroy'
+        // doing this on the 'onDestroy'
         presenter.onDestroy()
     }
 }

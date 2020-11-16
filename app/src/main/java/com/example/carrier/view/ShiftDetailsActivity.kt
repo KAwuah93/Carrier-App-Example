@@ -18,7 +18,7 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
 
         presenter = MainActivityPresenter(this)
         // starting the call from the presenter
-        // would use some primarykey information relevant to the data table but going with '0' as a place holder
+        // would use some primary key information relevant to the data table but going with '0' as a place holder
         // could probably get the data from a login source when carried over to this activity.
         presenter.getShiftData(0)
 
@@ -42,12 +42,13 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
 
     fun onClick(v : View){
         // this is where the message goes. Right now we'll just feed it a dummy line
-        // but we could use parameters to make sure we are sending the right data
+        // but we could use parameters to allow us to modify the data in the future
+        // you could use editext.text here if there is an input to make things easier.
         presenter.sendShiftMessage("Hello world!")
     }
 
     override fun updateUI() {
-        //presenter.updateShiftID(0)
+        // Updating the UI to reflect the dummy data.
         statusView.text = presenter.shiftData.status
         driverIdView.text = presenter.shiftData.driverId.toString()
         driverNameView.text = presenter.shiftData.driverName.toString()
@@ -56,6 +57,8 @@ class ShiftDetailsActivity : AppCompatActivity(), MainActivityPresenterInterface
 
     override fun onDestroy() {
         super.onDestroy()
+        // getting rid of references to the current activity to help combat possible memory leaks
+        // doing this on the 'ondestroy'
         presenter.onDestroy()
     }
 }
